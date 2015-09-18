@@ -133,6 +133,7 @@ gem install bundler
 apt-get install cucumber
 
 # Install Chrome Driver
+cd ~/wget-download
 wget -N http://chromedriver.storage.googleapis.com/2.10/chromedriver_linux64.zip
 unzip chromedriver_linux64.zip -d ~/wget-download/chromedriver
 
@@ -146,7 +147,8 @@ sudo ln -s /usr/local/share/chromedriver /usr/local/bin/chromedriver
 sudo ln -s /usr/local/share/chromedriver /usr/bin/chromedriver
 
 # Create the Root of the Git Repositories (~/geek)
-if [ ! -d ~/geek ]   # Or use quote and $HOME like if [ -d "$HOME/geek" ] cause you can't use somethng like "~/geek"
+cd ~/
+if [ ! -d ~/geek ]   # Or use quote and $HOME like if [ -d "$HOME/geek" ] cause you can't use sometihng like "~/geek" because of the quote (")
 then
 	echo ">> ~/geek directory don't exist, let's create it..."
 	mkdir ~/geek
