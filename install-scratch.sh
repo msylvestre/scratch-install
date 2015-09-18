@@ -3,6 +3,13 @@ echo "==========================================================================
 echo "|                                  MAIN INSTALL SCRIPT                                     |"
 echo "============================================================================================"
 
+# TODO
+# ----------------------------------------------------------------------------------
+# - Add all the PPA at the beginning of the script and do one 'sudo apt-get update'
+# - Use Chrominum instead of Google Chrome since it's opensource and part of a PPA
+# - Get Node pre-compiled here : http://www.ubuntuupdates.org/ppa/chris_lea_nodejs
+
+
 
 echo "---------------------------------------------------------------------------------------------"
 echo "++++ Install Basic Dependencies ++++"
