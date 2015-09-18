@@ -126,8 +126,8 @@ rvm install 1.9.3-p551 --with-openssl-dir=$HOME/.rvm/usr
 sudo apt-get install ruby-dev
 
 # Update gem and then install bundler (to use 'bundle install' in ruby app to install the dependencies)
-gem update --system
-gem install bundler
+sudo gem update --system
+sudo gem install bundler
 
 # Install Cucumber
 apt-get install cucumber
@@ -152,6 +152,7 @@ if [ ! -d ~/geek ]   # Or use quote and $HOME like if [ -d "$HOME/geek" ] cause 
 then
 	echo ">> ~/geek directory don't exist, let's create it..."
 	mkdir ~/geek
+	cd ~/geek
 else
 	echo ">> ~/geek exist, moving in..."
 	cd ~/geek
