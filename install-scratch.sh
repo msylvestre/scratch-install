@@ -90,9 +90,9 @@ echo "--------------------------------------------------------------------------
 echo "++++ Install Docker ++++"
 echo "---------------------------------------------------------------------------------------------"
 
-curl -sSL https://get.docker.com/ | sh
-# wget -qO- https://get.docker.com/ | sh
-
+wget -qO- https://get.docker.com/ | sh
+sudo usermod -aG docker fuel
+# Need a re-login to use docker withoout sudo :)
 
 echo "---------------------------------------------------------------------------------------------"
 echo "++++ Install Virtual Box ++++"
