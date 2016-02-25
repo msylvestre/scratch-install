@@ -142,7 +142,7 @@ apt-get install cucumber
 
 # Install Chrome Driver
 cd ~/wget-download
-wget -N http://chromedriver.storage.googleapis.com/2.10/chromedriver_linux64.zip
+wget -N http://chromedriver.storage.googleapis.com/2.21/chromedriver_linux64.zip
 unzip chromedriver_linux64.zip -d ~/wget-download/chromedriver
 
 # Make Chrome Driver executable for anybody and move it to /usr/local/share/
