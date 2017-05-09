@@ -45,6 +45,15 @@ sudo apt-get update
 sudo apt-get install sublime-text
 
 
+
+echo "---------------------------------------------------------------------------------------------"
+echo "++++ Install POstgres & PG Admin ++++"
+echo "---------------------------------------------------------------------------------------------"
+
+sudo apt-get install -y postgresql postgresql-contrib
+sudo apt-get install -y pgadmin3 
+
+
 echo "---------------------------------------------------------------------------------------------"
 echo "++++ Install Google Drive (aka OverGrive) ++++"
 echo "---------------------------------------------------------------------------------------------"
