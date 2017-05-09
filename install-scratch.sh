@@ -47,11 +47,34 @@ sudo apt-get install sublime-text
 
 
 echo "---------------------------------------------------------------------------------------------"
-echo "++++ Install POstgres & PG Admin ++++"
+echo "++++ Install Postgres & PG Admin ++++"
 echo "---------------------------------------------------------------------------------------------"
 
 sudo apt-get install -y postgresql postgresql-contrib
 sudo apt-get install -y pgadmin3 
+
+echo "Basic Server Setup"
+echo "To start off, we need to set the password of the PostgreSQL user (role) called \"postgres\"; we will not be able to access the server externally otherwise. As the local “postgres” Linux user, we are allowed to connect and manipulate the server using the psql command."
+
+echo "In a terminal, type:"
+
+echo "sudo -u postgres psql postgres"
+echo "this connects as a role with same name as the local user, i.e. \"postgres\", to the database called \"postgres\" (1st argument to psql)."
+
+echo "Set a password for the \"postgres\" database role using the command:"
+
+echo "\password postgres"
+echo "and give your password when prompted. The password text will be hidden from the console for security purposes."
+
+echo "Type Control+D or \q to exit the posgreSQL prompt."
+
+echo "Create database"
+
+echo "To create the first database, which we will call \"mydb\", simply type:"
+
+echo "sudo -u postgres createdb mydb"
+ 
+
 
 
 echo "---------------------------------------------------------------------------------------------"
