@@ -36,6 +36,7 @@ sudo dpkg -i ./google-chrome*.deb
 sudo apt-get install -f
 
 
+
 echo "---------------------------------------------------------------------------------------------"
 echo "++++ Install Sublime ++++"
 echo "---------------------------------------------------------------------------------------------"
@@ -53,27 +54,42 @@ echo "--------------------------------------------------------------------------
 sudo apt-get install -y postgresql postgresql-contrib
 sudo apt-get install -y pgadmin3 
 
-echo "Basic Server Setup"
-echo "To start off, we need to set the password of the PostgreSQL user (role) called \"postgres\"; we will not be able to access the server externally otherwise. As the local “postgres” Linux user, we are allowed to connect and manipulate the server using the psql command."
+# Basic Server Setup
+# To start off, we need to set the password of the PostgreSQL user (role) called \"postgres\"; we will not be able to access the server externally otherwise. As the local “postgres” Linux user, we are allowed to connect and manipulate the server using the psql command.
 
-echo "In a terminal, type:"
+# In a terminal, type:
 
-echo "sudo -u postgres psql postgres"
-echo "this connects as a role with same name as the local user, i.e. \"postgres\", to the database called \"postgres\" (1st argument to psql)."
+sudo -u postgres psql postgres
 
-echo "Set a password for the \"postgres\" database role using the command:"
+# this connects as a role with same name as the local user, i.e. \"postgres\", to the database called \"postgres\" (1st argument to psql).
+# Set a password for the \"postgres\" database role using the command:
 
-echo "\password postgres"
-echo "and give your password when prompted. The password text will be hidden from the console for security purposes."
+\password postgres
+# and give your password when prompted. The password text will be hidden from the console for security purposes.
+# Type Control+D or \q to exit the posgreSQL prompt.
 
-echo "Type Control+D or \q to exit the posgreSQL prompt."
+# Create database
+# To create the first database, which we will call \"mydb\", simply type:
 
-echo "Create database"
-
-echo "To create the first database, which we will call \"mydb\", simply type:"
-
-echo "sudo -u postgres createdb mydb"
+sudo -u postgres createdb mydb
  
+
+
+echo "---------------------------------------------------------------------------------------------"
+echo "++++ Install Spotify ++++"
+echo "---------------------------------------------------------------------------------------------"
+
+# 1. Add the Spotify repository signing key to be able to verify downloaded packages
+sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys BBEBDCB318AD50EC6865090613B00F1FD2C19886
+
+# 2. Add the Spotify repository
+echo deb http://repository.spotify.com stable non-free | sudo tee /etc/apt/sources.list.d/spotify.list
+
+# 3. Update list of available packages
+sudo apt-get update
+
+# 4. Install Spotify
+sudo apt-get install spotify-client
 
 
 
