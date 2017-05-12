@@ -310,6 +310,16 @@ echo "You can run 'xclip -sel clip < ~/.ssh/id_rsa.pub' to re-copy the key to yo
 
 
 
+echo "---------------------------------------------------------------------------------------------"
+echo "++++ Fix audio issue on XPS 13 ++++"
+echo "---------------------------------------------------------------------------------------------"
+
+sudo apt-get purge pulseaudio pulseaudio-equalizer
+sudo apt-get install pulseaudio
+sudo apt-get install pulseaudio-equalizer
+
+
+
 echo "============================================================================================"
 echo "|                            MAIN INSTALL SCRIPT - THE END !!!                             |"
 echo "============================================================================================"
