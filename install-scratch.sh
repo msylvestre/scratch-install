@@ -160,6 +160,16 @@ sudo apt-get install virtualbox
 
 
 echo "---------------------------------------------------------------------------------------------"
+echo "++++ Heroku Dev environment ++++"
+echo "---------------------------------------------------------------------------------------------"
+
+sudo add-apt-repository "deb https://cli-assets.heroku.com/branches/stable/apt ./"
+curl -L https://cli-assets.heroku.com/apt/release.key | sudo apt-key add -
+sudo apt-get update
+sudo apt-get install heroku
+
+
+echo "---------------------------------------------------------------------------------------------"
 echo "++++ Install Cucumber Dev environment ++++"
 echo "---------------------------------------------------------------------------------------------"
 
