@@ -142,8 +142,9 @@ echo "++++ Install Zoom ++++"
 echo "---------------------------------------------------------------------------------------------"
 
 cd ~/wget-download
-wget https://zoom.us/client/latest/ZoomInstaller_i386.deb
-sudo dpkg -i Zoom*.deb
+wget https://zoom.us/client/latest/zoom_amd64.deb
+sudo apt-get install libxcb-xtest0
+sudo dpkg -i zoom_amd64.deb
 sudo apt-get -f install
 
 
@@ -151,12 +152,11 @@ echo "--------------------------------------------------------------------------
 echo "++++ Install Skype ++++"
 echo "---------------------------------------------------------------------------------------------"
 
-# Users of 64-bit Ubuntu, should enable MultiArch if it isn't already enabled by running the command
-sudo dpkg --add-architecture i386
+# Download the .rpm package on skype.com
 
-sudo add-apt-repository "deb http://archive.canonical.com/ $(lsb_release -sc) partner"
-sudo apt-get update
-sudo apt-get install skype pulseaudio:i386
+sudo apt-get install alien
+sudo alien -k skypeforlinux-64.rpm
+sudo dpkg -i skypeforlinux-64.deb
 
 
 echo "---------------------------------------------------------------------------------------------"
