@@ -25,13 +25,13 @@ sudo apt-get update
 # Basic tools
 sudo apt-get install curl unzip git
 
+
 echo "---------------------------------------------------------------------------------------------"
 echo "++++ Install Node 4.x ++++"
 echo "---------------------------------------------------------------------------------------------"
 
-curl -sL https://deb.nodesource.com/setup_4.x | sudo -E bash -
-sudo apt-get install -y nodejs
-sudo apt-get install -y build-essential
+wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.33.0/install.sh | bash
+nvm install v6
 
 
 echo "---------------------------------------------------------------------------------------------"
@@ -56,11 +56,11 @@ echo "--------------------------------------------------------------------------
 echo "++++ Install Sublime ++++"
 echo "---------------------------------------------------------------------------------------------"
 
-sudo add-apt-repository ppa:webupd8team/sublime-text-2
+wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | sudo apt-key add -
+sudo apt-get install apt-transport-https
+echo "deb https://download.sublimetext.com/ apt/stable/" | sudo tee /etc/apt/sources.list.d/sublime-text.list
 sudo apt-get update
 sudo apt-get install sublime-text
-
-
 
 echo "---------------------------------------------------------------------------------------------"
 echo "++++ Install Postgres & PG Admin ++++"
