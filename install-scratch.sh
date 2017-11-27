@@ -323,7 +323,7 @@ echo "--------------------------------------------------------------------------
 echo "++++ Create and install ssh key for Git ++++"
 echo "---------------------------------------------------------------------------------------------"
 
-ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
+ssh-keygen -t rsa -b 4096 -C "marco@venzee.com"
 eval "$(ssh-agent -s)"
 ssh-add ~/.ssh/id_rsa
 sudo apt-get install xclip
