@@ -25,7 +25,7 @@ sudo apt-get update
 # Basic tools
 sudo apt-get install -y curl unzip git gcc g++ \
      software-properties-common build-essential libtool \
-     apt-transport-https ca-certificates 
+     apt-transport-https ca-certificates \
      gnupg2 
      
 
