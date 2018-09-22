@@ -23,15 +23,20 @@ cd ~/wget-download
 sudo apt-get update
 
 # Basic tools
-sudo apt-get install curl unzip git
+sudo apt-get install -y curl unzip git gcc g++ \
+     software-properties-common build-essential libtool \
+     apt-transport-https ca-certificates 
+     gnupg2 
+     
+
 
 
 echo "---------------------------------------------------------------------------------------------"
-echo "++++ Install Node 4.x ++++"
+echo "++++ Install Node 8.12 (LTS as of sep-18) ++++"
 echo "---------------------------------------------------------------------------------------------"
 
 wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.33.0/install.sh | bash
-nvm install v6
+nvm install v8
 
 
 echo "---------------------------------------------------------------------------------------------"
@@ -60,7 +65,7 @@ wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | sudo apt-key add
 sudo apt-get install apt-transport-https
 echo "deb https://download.sublimetext.com/ apt/stable/" | sudo tee /etc/apt/sources.list.d/sublime-text.list
 sudo apt-get update
-sudo apt-get install sublime-text
+sudo apt-get install -y sublime-text
 
 echo "---------------------------------------------------------------------------------------------"
 echo "++++ Install Postgres & PG Admin ++++"
@@ -95,7 +100,7 @@ echo "++++ Install Spotify ++++"
 echo "---------------------------------------------------------------------------------------------"
 
 # 1. Add the Spotify repository signing keys to be able to verify downloaded packages
-sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 0DF731E45CE24F27EEEB1450EFDC8610341D9410
+sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 931FF8E79F0876134EDDBDCCA87FF9DF48BF1C90
 
 # 2. Add the Spotify repository
 echo deb http://repository.spotify.com stable non-free | sudo tee /etc/apt/sources.list.d/spotify.list
@@ -104,7 +109,7 @@ echo deb http://repository.spotify.com stable non-free | sudo tee /etc/apt/sourc
 sudo apt-get update
 
 # 4. Install Spotify
-sudo apt-get install spotify-client
+sudo apt-get install -y spotify-client
 
 
 
@@ -114,7 +119,7 @@ echo "--------------------------------------------------------------------------
 
 sudo apt-add-repository ppa:remmina-ppa-team/remmina-next
 sudo apt-get update
-sudo apt-get install remmina remmina-plugin-rdp libfreerdp-plugins-standard
+sudo apt-get install -y remmina remmina-plugin-rdp libfreerdp-plugins-standard
 
 
 
@@ -154,16 +159,23 @@ echo "--------------------------------------------------------------------------
 
 # Download the .rpm package on skype.com
 
-sudo apt-get install alien
-sudo alien -k skypeforlinux-64.rpm
-sudo dpkg -i skypeforlinux-64.deb
+curl https://repo.skype.com/data/SKYPE-GPG-KEY | sudo apt-key add -
+echo "deb https://repo.skype.com/deb stable main" | sudo tee /etc/apt/sources.list.d/skypeforlinux.list
+sudo apt update
+sudo apt install skypeforlinux
 
 
 echo "---------------------------------------------------------------------------------------------"
 echo "++++ Install Docker ++++"
 echo "---------------------------------------------------------------------------------------------"
 
-wget -qO- https://get.docker.com/ | sh
+curl -fsSL https://download.docker.com/linux/debian/gpg | sudo apt-key add -
+sudo add-apt-repository \
+     "deb [arch=amd64] https://download.docker.com/linux/ubuntu xenial stable"
+
+sudo apt update
+sudo apt install docker-ce
+
 sudo usermod -aG docker fuel
 # Need a re-login to use docker withoout sudo :)
 
@@ -181,129 +193,7 @@ echo "--------------------------------------------------------------------------
 sudo add-apt-repository "deb https://cli-assets.heroku.com/branches/stable/apt ./"
 curl -L https://cli-assets.heroku.com/apt/release.key | sudo apt-key add -
 sudo apt-get update
-sudo apt-get install heroku
-
-
-echo "---------------------------------------------------------------------------------------------"
-echo "++++ Install Cucumber Dev environment ++++"
-echo "---------------------------------------------------------------------------------------------"
-
-# Other dependencies for RUBY if things go wrong...
-# HINT : Make sure 'apt-get update' don't have any error, otherwise you won't be able to run rvm command successfully (and not even compile ruby 1.9.3)
-
-#sudo apt-get install git-core curl zlib1g-dev build-essential libssl-dev libreadline-dev libyaml-dev libsqlite3-dev sqlite3 libxml2-dev libxslt1-dev libcurl4-openssl-dev python-software-properties libffi-dev
-
-
-# Other dependencies for RVM if things go wrong...
-#sudo apt-get install libgdbm-dev libncurses5-dev automake libtool bison libffi-dev
-
-# Get the key (aka licence)
-sudo apt-get install gnupg2
-curl -sSL https://rvm.io/mpapis.asc | gpg2 --import -
-
-# Install RVM
-curl -sSL https://get.rvm.io | bash -s stable
-
-# Load the "environement info"
-source ~/.rvm/scripts/rvm
-
-# Install openssl package before installing Ruby in order to compile it with openssl
-rvm pkg install openssl
-
-# Install Ruby w/ openssl
-rvm install 1.9.3-p551 --with-openssl-dir=$HOME/.rvm/usr
-
-# Install the "ruby developer library"
-sudo apt-get install ruby-dev
-
-# Update gem and then install bundler (to use 'bundle install' in ruby app to install the dependencies)
-sudo gem update --system
-sudo gem install bundler
-
-# Install Cucumber
-apt-get install cucumber
-
-# Install Chrome Driver
-cd ~/wget-download
-wget -N http://chromedriver.storage.googleapis.com/2.21/chromedriver_linux64.zip
-unzip chromedriver_linux64.zip -d ~/wget-download/chromedriver
-
-# Make Chrome Driver executable for anybody and move it to /usr/local/share/
-cd ~/wget-download/chromedriver
-chmod +x chromedriver
-sudo cp ~/wget-download/chromedriver/chromedriver /usr/local/share/chromedriver
-
-# Create symlink for chromedriver
-sudo ln -s /usr/local/share/chromedriver /usr/local/bin/chromedriver
-sudo ln -s /usr/local/share/chromedriver /usr/bin/chromedriver
-
-# Create the Root of the Git Repositories (~/geek)
-cd ~/
-if [ ! -d ~/geek ]   # Or use quote and $HOME like if [ -d "$HOME/geek" ] cause you can't use sometihng like "~/geek" because of the quote (")
-then
-	echo ">> ~/geek directory don't exist, let's create it..."
-	mkdir ~/geek
-	cd ~/geek
-else
-	echo ">> ~/geek exist, moving in..."
-	cd ~/geek
-fi
-
-# Clone the repo
-git clone https://github.com/venzee/qa.git
-
-# Setup the OS config file
-cd ~/geek/qa
-cp ci_os.json.template ci_os.json
-
-# Install gem for Cucumber and test it
-cd ~/geek/qa/cucumber
-bundle install
-bundle exec cucumber -t @qa
-
-
-echo "---------------------------------------------------------------------------------------------"
-echo "++++ Install Venzee Front-End Dev environment ++++"
-echo "---------------------------------------------------------------------------------------------"
-
-sudo apt-get update
-
-# Install Front-End Dependencies inclusing Python
-sudo apt-get install gcc g++ pkg-config git graphicsmagick imagemagick libjpeg-dev phantomjs libcairo2-dev python-pip
-
-# Install AWS Command-Line Interface (to deploy easily to S3 bucket)
-sudo pip install awscli
-
-# Install node 0.10.36 and npm
-cd ~/geek
-git clone git://github.com/joyent/node.git
-cd node
-git checkout tags/v0.10.36
-./configure
-sudo make install
-cd ~/geek
-git clone git://github.com/isaacs/npm.git
-cd npm
-sudo make install
-
-# Install Ruby dependencies
-sudo gem install sass
-
-# Install npm package dependencies
-sudo npm install -g bower
-sudo npm install -g grunt-cli
-sudo npm install -g jshint
-
-# Clone the repo
-cd ~/geek
-git clone https://github.com/venzee/venzee.com.git
-#git clone git@github.com:venzee/venzee.com.git
-cd venzee.com
-sudo npm install
-grunt dev
-
-# Add venzee.dev to host file - not sure if it's needed 
-# Do '$ subl /etc/hosts' and add '127.0.0.1 venzee.dev'
+sudo apt-get install -y heroku
 
 
 echo "---------------------------------------------------------------------------------------------"
@@ -312,7 +202,7 @@ echo "--------------------------------------------------------------------------
 
 sudo add-apt-repository ppa:gnome-terminator
 sudo apt-get update
-sudo apt-get install terminator
+sudo apt-get -y install terminator
 
 # Check apt-get- update after installing Terminator, you may need 
 # to clean /etc/apt/sources.list.d/gnome-terminator-ubuntu-ppa-vivid.list and
@@ -332,16 +222,6 @@ xclip -sel clip < ~/.ssh/id_rsa.pub
 echo "Copy the ssh key store in your clipboard to your git account to enable git wo/ login"
 echo "run '$ ssh -T git@github.com' to validate the key installation"
 echo "You can run 'xclip -sel clip < ~/.ssh/id_rsa.pub' to re-copy the key to your clipboard" 
-
-
-
-echo "---------------------------------------------------------------------------------------------"
-echo "++++ Fix audio issue on XPS 13 ++++"
-echo "---------------------------------------------------------------------------------------------"
-
-sudo apt-get purge pulseaudio pulseaudio-equalizer
-sudo apt-get install pulseaudio
-sudo apt-get install pulseaudio-equalizer
 
 
 
