@@ -204,10 +204,20 @@ sudo add-apt-repository ppa:gnome-terminator
 sudo apt-get update
 sudo apt-get -y install terminator
 
-# Check apt-get- update after installing Terminator, you may need 
-# to clean /etc/apt/sources.list.d/gnome-terminator-ubuntu-ppa-vivid.list and
-# /etc/apt/sources.list.d/gnome-terminator-ubuntu-ppa-vivid.list.save if invalid url are introduced
 
+echo "---------------------------------------------------------------------------------------------"
+echo "++++ Install AWS CLI & AWS EB CLI ++++"
+echo "---------------------------------------------------------------------------------------------"
+
+# Install PIP
+curl -O https://bootstrap.pypa.io/get-pip.py
+sudo python get-pip.py
+
+#Install AWS CLI
+sudo pip install awscli --upgrade
+
+#Install EB
+sudo pip install awsebcli --upgrade
 
 echo "---------------------------------------------------------------------------------------------"
 echo "++++ Create and install ssh key for Git ++++"
@@ -222,6 +232,8 @@ xclip -sel clip < ~/.ssh/id_rsa.pub
 echo "Copy the ssh key store in your clipboard to your git account to enable git wo/ login"
 echo "run '$ ssh -T git@github.com' to validate the key installation"
 echo "You can run 'xclip -sel clip < ~/.ssh/id_rsa.pub' to re-copy the key to your clipboard" 
+
+
 
 
 
